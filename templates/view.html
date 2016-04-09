@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+    <title>iridium dashboard</title>
+    <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="https://www.github.com/devnulling/iridium-dashboard" target="_blank">iridium dashboard</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">home</a></li>
+            <li><a href="/view">data</a></li>
+          </ul>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="starter-template">
+
+
+      <table class="table table-hover">
+        <tr> 
+          <th class="text-center">ID</th>
+          <th class="text-center">in_rate</th>
+          <th class="text-center">in_rate_avg</th>
+          <th class="text-center">queue_len</th>
+          <th class="text-center">queue_len_max</th>
+          <th class="text-center">out_rate</th>
+          <th class="text-center">ok_ratio</th>
+          <th class="text-center">ok_rate</th>
+          <th class="text-center">ok_ratio_total</th>
+          <th class="text-center">ok_count_total</th>
+          <th class="text-center">ok_rate_avg</th>
+          <th class="text-center">drop_count_total</th>
+          <th class="text-center">timestamp</th>
+          <th class="text-center">formatted</th>
+        </tr>
+
+        {% for row in data %}
+          <tr>
+            {% for item in row %}
+              <td>{{ item }}</td>
+            {% endfor %}
+          </tr>
+        {% endfor %}
+      </table>
+      </div>
+    </div><!-- /.container -->
+
+
+    <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    </body>
+</html>
