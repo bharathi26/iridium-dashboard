@@ -16,4 +16,4 @@ Start the dashboard by running
  
 Enable the dashboard from extractor.py with the -x flag, set host or port with -y or -z flags
 
-    extractor.py -x True -y localhost -p 5000
+    extractor.py -x True -y localhost -z 5000
