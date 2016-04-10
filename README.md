@@ -17,7 +17,7 @@
 
 #### Install Requisites
 
-    sudo pip install flask flask-socketio flask-mysql gevent
+    sudo pip install flask flask-socketio flask-mysql flask-mysqldb gevent 
 
 #### Login & Create MySQL Database
 
