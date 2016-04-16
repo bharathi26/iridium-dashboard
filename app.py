@@ -36,7 +36,7 @@ def jsonData():
     return jsonify(data=cursor.fetchall())
 
 def clean(val):
-    return cgi.escape(request.args.get(val, ''))
+    return int(round(cgi.escape(request.args.get(val, ''))))
 
 @app.route('/')
 def main():
