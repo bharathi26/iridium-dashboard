@@ -11,5 +11,5 @@ ok_ratio_total INT(10),
 ok_count_total INT(32),
 ok_rate_avg INT(10),
 drop_count_total INT(10),
-ts VARCHAR(50)
+ts VARCHAR(50),
 primary KEY (id));
