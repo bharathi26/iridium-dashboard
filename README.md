@@ -13,7 +13,7 @@ Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridi
 
 #### Install MySQL
 
-    sudo apt-get install mysql-server mysql-client
+    sudo apt-get install mysql-server mysql-client libmysqlclient-dev
     sudo mysql_install_db
     sudo mysql_secure_installation
 
