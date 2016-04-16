@@ -36,6 +36,10 @@ Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridi
 
     mysql -u<user> -p<password> iridium < iridium.sql
 
+#### Edit 
+Edit app.py with password set for mysql iridium user
+
+#### Start
 Start the dashboard by running 
 
     python app.py
