@@ -1,6 +1,8 @@
 # iridium-dashboard
 Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridium-toolkit) built with Flask, Websockets, MySQL and Charts.js
 
+![iridium-dashboard](https://raw.githubusercontent.com/devnulling/iridium-dashboard/master/images/dashboard.png)
+
 ### Requisites
 
  * Python (2.7)
