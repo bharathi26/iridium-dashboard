@@ -1,5 +1,5 @@
 # iridium-dashboard
-Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridium-toolkit) built with Flask, Websockets, MySQL and Charts.js
+Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridium-toolkit) built with Flask, Websockets, Bootstrap, MySQL, Bokeh and Charts.js
 
 ![iridium-dashboard](https://raw.githubusercontent.com/devnulling/iridium-dashboard/master/images/dashboard.png)
 
@@ -11,7 +11,11 @@ Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridi
  * Flask-MySQL
  * Gevent 
  * MySQL
- 
+ * Bokeh
+ * Pandas
+ * Requests
+ * NumPY
+
 
 #### Install MySQL
 
@@ -21,7 +25,7 @@ Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridi
 
 #### Install Requisites
 
-    sudo pip install flask flask-socketio flask-mysql flask-mysqldb gevent 
+    sudo pip install flask flask-socketio flask-mysql flask-mysqldb gevent bokeh pandas numpy requests
 
 #### Login & Create MySQL Database
 

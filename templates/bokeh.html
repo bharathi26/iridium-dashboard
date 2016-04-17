@@ -11,10 +11,13 @@
     <title>iridium dashboard</title>
     <link href="{{ url_for('static', filename='bower_components/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
+    <link href="http://cdn.pydata.org/bokeh/release/bokeh-0.11.1.min.css" rel="stylesheet" type="text/css">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="http://cdn.pydata.org/bokeh/release/bokeh-0.11.1.min.js"></script>
+
+    {{script|safe}}
   </head>
-
   <body>
-
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container">
         <div class="navbar-header">
@@ -37,38 +40,15 @@
     </nav>
 
     <div class="container-fluid">
-      <div class="starter-template">
-
-
-      <table class="table table-hover">
-        <tr> 
-          <th class="text-center">ID</th>
-          <th class="text-center">in_rate</th>
-          <th class="text-center">in_rate_avg</th>
-          <th class="text-center">queue_len</th>
-          <th class="text-center">queue_len_max</th>
-          <th class="text-center">out_rate</th>
-          <th class="text-center">ok_ratio</th>
-          <th class="text-center">ok_rate</th>
-          <th class="text-center">ok_ratio_total</th>
-          <th class="text-center">ok_count_total</th>
-          <th class="text-center">ok_rate_avg</th>
-          <th class="text-center">drop_count_total</th>
-          <th class="text-center">timestamp</th>
-          <th class="text-center">formatted</th>
-        </tr>
-
-        {% for row in data %}
-          <tr>
-            {% for item in row %}
-              <td>{{ item }}</td>
-            {% endfor %}
-          </tr>
-        {% endfor %}
-      </table>
+      <div style="padding-left: 100px; padding-top:30px;">
+        <div>
+          {{div.main|safe}}
+        </div>
+        <div>
+          {{div.total|safe}}
+        </div>
       </div>
     </div><!-- /.container -->
-
 
     <script src="{{ url_for('static', filename='bower_components/jquery/dist/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='bower_components/bootstrap/dist/js/bootstrap.min.js') }}"></script>
