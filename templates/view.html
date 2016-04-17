@@ -30,7 +30,6 @@
           <ul class="nav navbar-nav">
             <li><a href="/">home</a></li>
             <li><a href="/view">data</a></li>
-            <li><a href="/bokeh">bokeh</a></li>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
@@ -60,9 +59,20 @@
 
         {% for row in data %}
           <tr>
-            {% for item in row %}
-              <td>{{ item }}</td>
-            {% endfor %}
+            <td>{{ row.id }}</td>
+            <td>{{ row.in_rate }}</td>
+            <td>{{ row.in_rate_avg }}</td>
+            <td>{{ row.queue_len }}</td>
+            <td>{{ row.queue_len_max }}</td>
+            <td>{{ row.out_rate }}</td>
+            <td>{{ row.ok_ratio }}</td>
+            <td>{{ row.ok_rate }}</td>
+            <td>{{ row.ok_ratio_total }}</td>
+            <td>{{ row.ok_count_total }}</td>
+            <td>{{ row.ok_rate_avg }}</td>
+            <td>{{ row.drop_count_total }}</td>
+            <td>{{ row.ts }}</td>
+            <td>{{ row.formatted_ts }}</td>
           </tr>
         {% endfor %}
       </table>
