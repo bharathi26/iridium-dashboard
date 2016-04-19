@@ -37,12 +37,22 @@ def getData():
     cursor.execute("SELECT *, DATE_FORMAT(FROM_UNIXTIME(ts),'%Y-%m-%d %T') as formatted_ts FROM iridium ORDER BY id DESC LIMIT 1440")
     return cursor.fetchall()
 
+def getInitData():
+    cursor.execute("SELECT *, DATE_FORMAT(FROM_UNIXTIME(ts),'%m-%d %T') as formatted_ts FROM iridium ORDER BY id DESC LIMIT 30")
+    return cursor.fetchall()
+
 def jsonData():
     cursor.execute("SELECT *, DATE_FORMAT(FROM_UNIXTIME(ts),'%Y-%m-%d %T') as formatted_ts FROM iridium ORDER BY id DESC LIMIT 1440")
     return jsonify(data=cursor.fetchall())
 
 def clean(val):
     return int(round(float(cgi.escape(request.args.get(val, '')))))
+
+@socketio.on('connect', namespace='/ws')
+def wsconnect():
+    data = getInitData()
+    for item in reversed(data):
+        socketio.emit('msg', {'timestamp': item['formatted_ts'], 'in_rate': item['in_rate'], 'in_rate_avg': item['in_rate_avg'], 'queue_len': item['queue_len'], 'queue_len_max': item['queue_len_max'], 'out_rate': item['out_rate'], 'ok_ratio': item['ok_ratio'], 'ok_rate': item['ok_rate'], 'ok_ratio_total': item['ok_ratio_total'], 'ok_count_total': item['ok_count_total'], 'ok_rate_avg': item['ok_rate_avg'], 'drop_count_total': item['drop_count_total']}, namespace='/ws')
 
 @app.route('/')
 def main():
