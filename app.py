@@ -26,7 +26,7 @@ app.config['MYSQL_DATABASE_HOST'] = '127.0.0.1'
 
 mysql.init_app(app)
 conn = mysql.connect()
-cursor =conn.cursor()
+cursor = conn.cursor()
 
 def insertData(in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,ok_rate_avg,drop_count_total,ts):
     query = "INSERT INTO `iridium`.`iridium` (`id`, `in_rate`,`in_rate_avg`,`queue_len`,`queue_len_max`,`out_rate`,`ok_ratio`,`ok_rate`,`ok_ratio_total`,`ok_count_total`,`ok_rate_avg`,`drop_count_total`,`ts`) VALUES (null,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\"%s\");" % (in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,ok_rate_avg,drop_count_total,ts)
