@@ -40,7 +40,7 @@ Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridi
 
 #### Create Iridium Table
 
-    mysql -u<user> -p<password> iridium < iridium.sql
+    mysql -u<user> -p iridium < iridium.sql
 
 #### Edit 
 Edit app.py with password set for mysql iridium user
