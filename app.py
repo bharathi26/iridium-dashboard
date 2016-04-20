@@ -52,7 +52,7 @@ def clean(val):
 def wsconnect():
     data = getInitData()
     for item in reversed(data):
-        socketio.emit('msg', {'timestamp': item['formatted_ts'], 'in_rate': item['in_rate'], 'in_rate_avg': item['in_rate_avg'], 'queue_len': item['queue_len'], 'queue_len_max': item['queue_len_max'], 'out_rate': item['out_rate'], 'ok_ratio': item['ok_ratio'], 'ok_rate': item['ok_rate'], 'ok_ratio_total': item['ok_ratio_total'], 'ok_count_total': item['ok_count_total'],  item['out_count'],'ok_rate_avg': item['ok_rate_avg'], 'drop_count_total': item['drop_count_total'], item['drop_count']}, namespace='/ws')
+        socketio.emit('msg', {'timestamp': item['formatted_ts'], 'in_rate': item['in_rate'], 'in_rate_avg': item['in_rate_avg'], 'queue_len': item['queue_len'], 'queue_len_max': item['queue_len_max'], 'out_rate': item['out_rate'], 'ok_ratio': item['ok_ratio'], 'ok_rate': item['ok_rate'], 'ok_ratio_total': item['ok_ratio_total'], 'ok_count_total': item['ok_count_total'],  'out_count': item['out_count'],'ok_rate_avg': item['ok_rate_avg'], 'drop_count_total': item['drop_count_total'], 'drop_count': item['drop_count']}, namespace='/ws')
 
 @app.route('/')
 def main():
