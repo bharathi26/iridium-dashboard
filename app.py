@@ -28,8 +28,8 @@ mysql.init_app(app)
 conn = mysql.connect()
 cursor = conn.cursor()
 
-def insertData(in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,ok_rate_avg,drop_count_total,ts):
-    query = "INSERT INTO `iridium`.`iridium` (`id`, `in_rate`,`in_rate_avg`,`queue_len`,`queue_len_max`,`out_rate`,`ok_ratio`,`ok_rate`,`ok_ratio_total`,`ok_count_total`,`ok_rate_avg`,`drop_count_total`,`ts`) VALUES (null,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\"%s\");" % (in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,ok_rate_avg,drop_count_total,ts)
+def insertData(in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,out_count,ok_rate_avg,drop_count_total,drop_count,ts):
+    query = "INSERT INTO `iridium`.`iridium` (`id`, `in_rate`,`in_rate_avg`,`queue_len`,`queue_len_max`,`out_rate`,`ok_ratio`,`ok_rate`,`ok_ratio_total`,`ok_count_total`,`out_count`,`ok_rate_avg`,`drop_count_total`,`drop_count`,`ts`) VALUES (null,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,\"%s\");" % (in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,out_count,ok_rate_avg,drop_count_total,drop_count,ts)
     cursor.execute(query)
     conn.commit()
 
@@ -52,7 +52,7 @@ def clean(val):
 def wsconnect():
     data = getInitData()
     for item in reversed(data):
-        socketio.emit('msg', {'timestamp': item['formatted_ts'], 'in_rate': item['in_rate'], 'in_rate_avg': item['in_rate_avg'], 'queue_len': item['queue_len'], 'queue_len_max': item['queue_len_max'], 'out_rate': item['out_rate'], 'ok_ratio': item['ok_ratio'], 'ok_rate': item['ok_rate'], 'ok_ratio_total': item['ok_ratio_total'], 'ok_count_total': item['ok_count_total'], 'ok_rate_avg': item['ok_rate_avg'], 'drop_count_total': item['drop_count_total']}, namespace='/ws')
+        socketio.emit('msg', {'timestamp': item['formatted_ts'], 'in_rate': item['in_rate'], 'in_rate_avg': item['in_rate_avg'], 'queue_len': item['queue_len'], 'queue_len_max': item['queue_len_max'], 'out_rate': item['out_rate'], 'ok_ratio': item['ok_ratio'], 'ok_rate': item['ok_rate'], 'ok_ratio_total': item['ok_ratio_total'], 'ok_count_total': item['ok_count_total'],  item['out_count'],'ok_rate_avg': item['ok_rate_avg'], 'drop_count_total': item['drop_count_total'], item['drop_count']}, namespace='/ws')
 
 @app.route('/')
 def main():
@@ -79,8 +79,10 @@ def run():
     ok_ratio =[]
     ok_ratio_total = []
     ok_count_total = []
+    out_count = []
     ok_rate_avg = []
     drop_count_total = []
+    drop_count = []
 
     for item in data:
         #print item["id"], item["formatted_ts"], item["in_rate"]
@@ -93,8 +95,10 @@ def run():
         ok_ratio.append(item["ok_ratio"])
         ok_ratio_total.append(item["ok_ratio_total"])
         ok_count_total.append(item["ok_count_total"])
+        out_count.append(item["out_count"])
         ok_rate_avg.append(item["ok_rate_avg"])
         drop_count_total.append(item["drop_count_total"])
+        drop_count.append(item["drop_count"])
 
     np_dates = np.array(dates, dtype='M8[m]')
     np_in_rate = np.array(in_rate)
@@ -105,8 +109,10 @@ def run():
     np_ok_ratio = np.array(ok_ratio)
     np_ok_ratio_total = np.array(ok_ratio_total)
     np_ok_count_total = np.array(ok_count_total)
+    np_out_count = np.array(out_count)
     np_ok_rate_avg = np.array(ok_rate_avg)
     np_drop_count_total = np.array(drop_count_total)
+    np_drop_count = np.array(drop_count)
 
     window_size = 30
     window = np.ones(window_size)/float(window_size)
@@ -122,8 +128,10 @@ def run():
     p.line(np_dates, np_out_rate, color='#000000', legend='out_rate')
     p.line(np_dates, np_ok_ratio, color='#ffb748', legend='ok_ratio')
     p.line(np_dates, np_ok_ratio_total, color='#CAB2D6', legend='ok_ratio_total')
+    p.line(np_dates, np_out_count, color="red", legend="out_count")
     p.line(np_dates, np_ok_rate_avg, color='#ff65ff', legend='ok_rate_avg')
     p.line(np_dates, np_drop_count_total, color='#564269', legend='drop_count_total')
+    p.line(np_dates, np_drop_count, color="blue", legend="drop_count")
 
     p1.line(np_dates, np_ok_count_total, color='#174517', legend='ok_count_total')
 
@@ -164,12 +172,14 @@ def postdata():
     ok_rate = clean('ok_rate')
     ok_ratio_total = clean('ok_ratio_total')
     ok_count_total = clean('ok_count_total')
+    out_count = clean('out_count')
     ok_rate_avg = clean('ok_rate_avg')
     drop_count_total = clean('drop_count_total')
+    drop_count = clean('drop_count')
 
-    insertData(in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,ok_rate_avg,drop_count_total,timestamp)
+    insertData(in_rate,in_rate_avg,queue_len,queue_len_max,out_rate,ok_ratio,ok_rate,ok_ratio_total,ok_count_total,out_count,ok_rate_avg,drop_count_total,drop_count,timestamp)
 
-    socketio.emit('msg', {'timestamp': timestamp_pretty, 'in_rate': in_rate, 'in_rate_avg': in_rate_avg, 'queue_len': queue_len, 'queue_len_max': queue_len_max, 'out_rate': out_rate, 'ok_ratio': ok_ratio, 'ok_rate': ok_rate, 'ok_ratio_total': ok_ratio_total, 'ok_count_total': ok_count_total, 'ok_rate_avg': ok_rate_avg, 'drop_count_total': drop_count_total }, namespace='/ws')
+    socketio.emit('msg', {'timestamp': timestamp_pretty, 'in_rate': in_rate, 'in_rate_avg': in_rate_avg, 'queue_len': queue_len, 'queue_len_max': queue_len_max, 'out_rate': out_rate, 'ok_ratio': ok_ratio, 'ok_rate': ok_rate, 'ok_ratio_total': ok_ratio_total, 'ok_count_total': ok_count_total, 'out_count': out_count, 'ok_rate_avg': ok_rate_avg, 'drop_count_total': drop_count_total, 'drop_count': drop_count }, namespace='/ws')
 
     return 'OK';
 

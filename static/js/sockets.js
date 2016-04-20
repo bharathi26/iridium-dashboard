@@ -23,10 +23,12 @@ $(document).ready(function() {
 		var ok_rate = msg.ok_rate;
 		var ok_ratio_total = msg.ok_ratio_total;
 		var ok_count_total = msg.ok_count_total;
+        var out_count = msg.out_count
 		var ok_rate_avg = msg.ok_rate_avg;
 		var drop_count_total = msg.drop_count_total;
+        var drop_count = msg.drop_count
 
-    	LineChart.addData([in_rate, in_rate_avg, queue_len, queue_len_max, out_rate, ok_rate, ok_ratio_total], timestamp);
+    	LineChart.addData([in_rate, in_rate_avg, queue_len, queue_len_max, out_rate, ok_rate, ok_ratio_total, out_count, drop_count], timestamp);
 	    
     	$("#ok_count_total").html(ok_count_total);
     	$("#drop_count_total").html(drop_count_total);
