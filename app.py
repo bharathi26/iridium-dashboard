@@ -119,6 +119,8 @@ def run():
    
     p = figure(width=1600, height=600, x_axis_type="datetime")
     p1 = figure(width=1600, height=600, x_axis_type="datetime")
+    p2 = figure(width=1600, height=600, x_axis_type="datetime")
+    p3 = figure(width=1600, height=600, x_axis_type="datetime")
 
     # add renderers
     p.line(np_dates, np_in_rate, color='#f0341f', legend='in_rate')
@@ -128,12 +130,14 @@ def run():
     p.line(np_dates, np_out_rate, color='#000000', legend='out_rate')
     p.line(np_dates, np_ok_ratio, color='#ffb748', legend='ok_ratio')
     p.line(np_dates, np_ok_ratio_total, color='#CAB2D6', legend='ok_ratio_total')
-    p.line(np_dates, np_out_count, color="red", legend="out_count")
     p.line(np_dates, np_ok_rate_avg, color='#ff65ff', legend='ok_rate_avg')
     p.line(np_dates, np_drop_count_total, color='#564269', legend='drop_count_total')
-    p.line(np_dates, np_drop_count, color="blue", legend="drop_count")
 
     p1.line(np_dates, np_ok_count_total, color='#174517', legend='ok_count_total')
+
+    p2.line(np_dates, np_out_count, color="#000000", legend="out_count")
+
+    p3.line(np_dates, np_drop_count, color="#000000", legend="drop_count")
 
     # NEW: customize by setting attributes
     p.title = "Iridium"
@@ -152,7 +156,7 @@ def run():
     p1.ygrid.band_fill_color="white"
     p1.ygrid.band_fill_alpha = 0.1
 
-    plots = {'main': p, 'total': p1}
+    plots = {'main': p, 'total': p1, 'count': p2, 'drop': p3}
     script, div = components(plots)
 
     return render_template('bokeh.html', script=script, div=div)
