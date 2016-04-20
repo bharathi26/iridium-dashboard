@@ -28,13 +28,18 @@ $(document).ready(function() {
 		var drop_count_total = msg.drop_count_total;
         var drop_count = msg.drop_count
 
-    	LineChart.addData([in_rate, in_rate_avg, queue_len, queue_len_max, out_rate, ok_rate, ok_ratio_total, out_count, drop_count], timestamp);
+    	LineChart.addData([in_rate, in_rate_avg, queue_len, queue_len_max, out_rate, ok_rate, ok_ratio_total], timestamp);
 	    
     	$("#ok_count_total").html(ok_count_total);
     	$("#drop_count_total").html(drop_count_total);
 
     	$("#ok_ratio").html(ok_ratio);
-    	$("#ok_rate_avg").html(ok_rate_avg);
+        $("#ok_rate_avg").html(ok_rate_avg);
+
+        $("#out_count").html(out_count);
+        $("#drop_count").html(drop_count);
+
+
 	    socketct++;
     });
 });

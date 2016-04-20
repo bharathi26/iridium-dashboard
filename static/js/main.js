@@ -70,26 +70,6 @@ var data = {
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(197,197,197,1)",
             data: []
-        },
-        {
-            label: "out_count",
-            fillColor: "rgba(197,197,197,0.2)",
-            strokeColor: "rgba(197,197,197,1)",
-            pointColor: "rgba(197,197,197,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(197,197,197,1)",
-            data: []
-        },
-        {
-            label: "drop_count",
-            fillColor: "rgba(197,197,197,0.2)",
-            strokeColor: "rgba(197,197,197,1)",
-            pointColor: "rgba(197,197,197,1)",
-            pointStrokeColor: "#fff",
-            pointHighlightFill: "#fff",
-            pointHighlightStroke: "rgba(197,197,197,1)",
-            data: []
         }
     ]
 };
