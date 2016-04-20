@@ -156,6 +156,22 @@ def run():
     p1.ygrid.band_fill_color="white"
     p1.ygrid.band_fill_alpha = 0.1
 
+    p2.title = "Iridium"
+    p2.legend.location = "top_left"
+    p2.grid.grid_line_alpha=0
+    p2.xaxis.axis_label = 'Date'
+    p2.yaxis.axis_label = 'Rate'
+    p2.ygrid.band_fill_color="white"
+    p2.ygrid.band_fill_alpha = 0.1
+
+    p3.title = "Iridium"
+    p3.legend.location = "top_left"
+    p3.grid.grid_line_alpha=0
+    p3.xaxis.axis_label = 'Date'
+    p3.yaxis.axis_label = 'Rate'
+    p3.ygrid.band_fill_color="white"
+    p3.ygrid.band_fill_alpha = 0.1
+
     plots = {'main': p, 'total': p1, 'count': p2, 'drop': p3}
     script, div = components(plots)
 
