@@ -1,5 +1,5 @@
 # iridium-dashboard
-Browser based dashboard for the [iridium-toolkit](https://github.com/muccc/iridium-toolkit) built with Flask, Websockets, Bootstrap, MySQL, Bokeh and Charts.js
+Browser based dashboard for the [gr-iridium](https://github.com/muccc/gr-iridium) and [iridium-toolkit](https://github.com/muccc/iridium-toolkit) built with Flask, Websockets, Bootstrap, MySQL, Bokeh and Charts.js
 
 ![iridium-dashboard](https://raw.githubusercontent.com/devnulling/iridium-dashboard/master/images/dashboard.png)
 
@@ -52,4 +52,4 @@ Start the dashboard by running
 
 Enable the dashboard from extractor.py with the -x flag, set host or port with -y or -z flags (default is localhost:5000)
 
-    extractor.py -x True -y localhost -z 5000
+    iridium-extractor -D 4 --dashboard examples/hackrf.conf | grep "A:OK" > output.bits
