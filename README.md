@@ -50,6 +50,6 @@ Start the dashboard by running
 
     python app.py
 
-Enable the dashboard from extractor.py with the -x flag, set host or port with -y or -z flags (default is localhost:5000)
+Enable the dashboard from iridium-extractor with the --dashboard flag, set host or port with --port or --host flags (default is localhost:5000)
 
     iridium-extractor -D 4 --dashboard examples/hackrf.conf | grep "A:OK" > output.bits
