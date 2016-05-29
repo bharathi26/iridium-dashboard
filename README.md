@@ -25,6 +25,7 @@ Browser based dashboard for the [gr-iridium](https://github.com/muccc/gr-iridium
 
 #### Install Requisites
 
+    sudo apt-get install python-pip python-dev
     sudo pip install flask flask-socketio flask-mysql flask-mysqldb gevent bokeh pandas numpy requests
 
 #### Login & Create MySQL Database
